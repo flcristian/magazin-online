@@ -126,12 +126,6 @@ public:
 		}
 	}
 
-	void afisareBannedUsersEmails(int indici[], int n) {
-		cout << "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" << endl;
-		for (int i = 0; i < n; i++) {
-			cout << users[indici[i]].getEmail() << " - " << users[indici[i]].getFullName() << " (Banned)" << endl;
-		}
-	}
 
 	void getManagerIDs(int indici[], int& n) {
 		for (int i = 0; i < dim; i++) {
@@ -142,12 +136,7 @@ public:
 		}
 	}
 
-	void afisareManagersEmails(int indici[], int n) {
-		cout << "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" << endl;
-		for (int i = 0; i < n; i++) {
-			cout << users[indici[i]].getEmail() << " - " << users[indici[i]].getFullName() << " (Manager)" << endl;
-		}
-	}
+	
 
 	void removeUser(int j) {
 		for (int i = j; i < dim - 1; i++) {
@@ -189,25 +178,52 @@ public:
 		f << toSave();
 	}
 
-	void viewBestClient(int ids[], int ammounts[], int n) {
-		int indici[100];
+
+	void getAllUsers(User users[100],int&d) {
+
+
 		for (int i = 0; i < dim; i++) {
-			indici[i] = getIndice(ids[i]);
+
+			users[i] = this->users[i];
 		}
-		cout << "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" << endl;
-		cout << "Cel mai mare cumparator este : " << users[indici[0]].getFullName() << endl;
-		cout << "Produse cumparate in valoare de : " << ammounts[0] << "$" << endl;
+		
+		d = dim;
 	}
 
-	void viewSortedByQuantityBought(int ids[], int ammounts[], int n) {
-		int indici[100];
-		for (int i = 0; i < n; i++) {
-			indici[i] = getIndice(ids[i]);
-		}
-		cout << "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" << endl;
-		for (int i = 0; i < n; i++) {
-			cout << users[indici[i]].getFullName() << " : " << ammounts[i] << "$" << endl;
-		}
-	}
+	
 
+
+
+
+
+	//void sortUsersByOrders(int ids[], int ordercounts[], int& n) {
+	//	n = dim;
+	//	for (int i = 0; i < dim; i++) {
+	//		ids[i] = users[i].getID();
+	//	}
+	//	for (int i = 0; i < dim; i++) {
+	//		ordercounts[i] = controlorder.getOrderCountOfUser(ids[i]);
+	//	}
+
+	//	bool flag = true;
+	//	do {
+	//		flag = true;
+	//		for (int i = 0; i < n - 1; i++) {
+	//			if (ordercounts[i] > ordercounts[i + 1]) {
+	//				int r1 = ordercounts[i];
+	//				int r2 = ids[i];
+	//				ordercounts[i] = ordercounts[i + 1];
+	//				ids[i] = ids[i + 1];
+	//				ordercounts[i + 1] = r1;
+	//				ids[i + 1] = r2;
+	//				flag = false;
+	//			}
+	//		}
+	//	} while (flag == false);
+	//}
+
+	//void seeWorstActivityClient(int ids[], int ordercounts[], int n) {
+	//	cout << "The worst activity client is : " << users[getIndice(ids[0])].getEmail() << endl;
+	//	cout << "Number of orders : " << ordercounts[0] << endl;
+	//}
 };

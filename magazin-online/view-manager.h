@@ -23,14 +23,14 @@ private:
 		int indici[100];
 		int n = 0;
 		controluser.getBannedIDs(indici, n);
-		controluser.afisareBannedUsersEmails(indici, n);
+		/*controluser.afisareBannedUsersEmails(indici, n);*/
 	}
 
 	void afisareManagerEmails() {
 		int indici[100];
 		int n = 0;
 		controluser.getManagerIDs(indici, n);
-		controluser.afisareManagersEmails(indici, n);
+		//controluser.afisareManagersEmails(indici, n);
 	}
 
 	// MODIFICARE USER :
@@ -273,19 +273,43 @@ private:
 		controlproduct.viewSortedByPopularity(ids, quantities, n);
 	}
 
-	void seeBestClient() {
-		int ids[100], ammounts[100];
-		int n = 0;
-		controlorder.sortedClientsByAmmountSpent(ids, ammounts, n);
-		controluser.viewBestClient(ids, ammounts, n);
+	void seeWorstActivityClient() {
+		int f[100]{};
+		controlorder.frecventaOrders(f);
+
+		User u[100];
+		int dim = 0;
+		controluser.getAllUsers(u, dim);
+		bool flag = true;
+		do {
+			flag = true;
+			for (int i = 0; i < dim - 1; i++) {
+				if (f[u[i].getID()] > f[u[i+1].getID()]){
+					User aux = u[i];
+					u[i] = u[i + 1];
+					u[i + 1] = aux;
+					flag = false;
+				}
+			}
+		} while (flag == false);
+
+		cout << "Cel mai inactiv user este : " << u[0].getEmail() << endl;
+		cout << "Numarul de comenzi : " << f[u[0].getID()] << endl;
 	}
 
-	void seeSortedByAmmountSpent() {
-		int ids[100], ammounts[100];
-		int n = 0;
-		controlorder.sortedClientsByAmmountSpent(ids, ammounts, n);
-		controluser.viewSortedByQuantityBought(ids, ammounts, n);
-	}
+	//void seeBestClient() {
+	//	int ids[100], ammounts[100];
+	//	int n = 0;
+	//	controlorder.sortedClientsByAmmountSpent(ids, ammounts, n);
+	//	controluser.viewBestClient(ids, ammounts, n);
+	//}
+
+	//void seeSortedByAmmountSpent() {
+	//	int ids[100], ammounts[100];
+	//	int n = 0;
+	//	controlorder.sortedClientsByAmmountSpent(ids, ammounts, n);
+	//	controluser.viewSortedByQuantityBought(ids, ammounts, n);
+	//}
 
 	// MENIURI :
 
@@ -385,18 +409,21 @@ private:
 			switch (z)
 			{
 			case 1:
-				seeMostPopularProduct();
+				/*seeMostPopularProduct();*/
 				break;
 			case 2:
-				seeSortedByPopularity();
+				/*seeSortedByPopularity();*/
 				break;
 			case 3:
-				seeBestClient();
+				/*seeBestClient();*/
 				break;
 			case 4:
-				seeSortedByAmmountSpent();
+				/*seeSortedByAmmountSpent();*/
 				break;
 			case 5:
+				seeWorstActivityClient();
+				break;
+			case 6:
 				running = false;
 				break;
 			default:
@@ -412,7 +439,8 @@ private:
 		cout << "- 2 pentru a vedea toate produsele sortate dupa popularitate" << endl;
 		cout << "- 3 pentru a vedea cel mai fidel client" << endl;
 		cout << "- 4 pentru a vedea totii clientii sortati dupa cantitatea cumparata" << endl;
-		cout << "- 5 pentru a iesi" << endl;
+		cout << "- 5 pentru a vedea clientul cu cea mai mica activitate" << endl;
+		cout << "- 6 pentru a iesi" << endl;
 	}
 
 public:
@@ -461,10 +489,10 @@ public:
 				removeUser();
 				break;
 			case 8:
-				afisareBannedUserEmails();
+				/*afisareBannedUserEmails();*/
 				break;
 			case 9:
-				afisareManagerEmails();
+				/*afisareManagerEmails();*/
 				break;
 			case 10:
 				addManager();

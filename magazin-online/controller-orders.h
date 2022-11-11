@@ -157,4 +157,20 @@ public:
 		} while (flag == false);
 	}
 
+	int getOrderCountOfUser(int userid) {
+		int c = 0;
+		for (int i = 0; i < dim; i++) {
+			if (orders[i].getCustomerID() == userid) {
+				c++;
+			}
+		}
+		return c;
+	}
+
+	void frecventaOrders(int f[]) {
+		for (int i = 0; i < dim; i++) {
+			f[orders[i].getCustomerID()]++;
+		}
+	}
+
 };
