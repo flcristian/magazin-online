@@ -1,0 +1,7 @@
+1 Bluza 60 Haine 96
+2 Beko 2400 Frigidere 34
+3 Tricou 40 Haine 77
+4 LG 1400 Televizoare 45
+5 Samsung 900 Telefoane 75
+6 Hanorac 80 Haine 158
+8 Test 100 Test 100

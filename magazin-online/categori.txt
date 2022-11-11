@@ -1,0 +1,4 @@
+1 Haine
+2 Televizoare
+3 Frigidere
+4 Laptopuri

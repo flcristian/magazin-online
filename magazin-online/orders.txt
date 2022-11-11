@@ -1,0 +1,10 @@
+1 5 240 pmeakes4@barnesandnoble.com Complete
+2 9 320 cstenet@pen.io Canceled
+3 4 14400 nmunro3@newsvine.com Complete
+4 9 560 cstenet@pen.io Canceled
+5 7 120 ddowty6@ifeng.com Complete
+6 4 800 nmunro3@newsvine.com Complete
+7 9 420 cstenet@pen.io Canceled
+8 2 8100 gash1@sourceforge.net Complete
+9 6 1800 kdacks5@dropbox.com Complete
+10 5 8400 pmeakes4@barnesandnoble.com Complete
