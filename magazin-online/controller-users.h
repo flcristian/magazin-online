@@ -178,52 +178,11 @@ public:
 		f << toSave();
 	}
 
-
 	void getAllUsers(User users[100],int&d) {
-
-
 		for (int i = 0; i < dim; i++) {
-
 			users[i] = this->users[i];
 		}
 		
 		d = dim;
 	}
-
-	
-
-
-
-
-
-	//void sortUsersByOrders(int ids[], int ordercounts[], int& n) {
-	//	n = dim;
-	//	for (int i = 0; i < dim; i++) {
-	//		ids[i] = users[i].getID();
-	//	}
-	//	for (int i = 0; i < dim; i++) {
-	//		ordercounts[i] = controlorder.getOrderCountOfUser(ids[i]);
-	//	}
-
-	//	bool flag = true;
-	//	do {
-	//		flag = true;
-	//		for (int i = 0; i < n - 1; i++) {
-	//			if (ordercounts[i] > ordercounts[i + 1]) {
-	//				int r1 = ordercounts[i];
-	//				int r2 = ids[i];
-	//				ordercounts[i] = ordercounts[i + 1];
-	//				ids[i] = ids[i + 1];
-	//				ordercounts[i + 1] = r1;
-	//				ids[i + 1] = r2;
-	//				flag = false;
-	//			}
-	//		}
-	//	} while (flag == false);
-	//}
-
-	//void seeWorstActivityClient(int ids[], int ordercounts[], int n) {
-	//	cout << "The worst activity client is : " << users[getIndice(ids[0])].getEmail() << endl;
-	//	cout << "Number of orders : " << ordercounts[0] << endl;
-	//}
 };

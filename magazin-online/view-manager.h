@@ -20,17 +20,45 @@ private:
 	}
 
 	void afisareBannedUserEmails() {
-		int indici[100];
+		User users[100];
+		int dim;
+		controluser.getAllUsers(users, dim);
+
+		User banned[100];
 		int n = 0;
-		controluser.getBannedIDs(indici, n);
-		/*controluser.afisareBannedUsersEmails(indici, n);*/
+		for (int i = 0; i < dim; i++) {
+			if (users[i].getStatus() == "Banned") {
+				banned[n] = users[i];
+				n++;
+			}
+		}
+
+		cout << "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" << endl;
+		cout << "Banned users :" << endl;
+		for (int i = 0; i < n; i++) {
+			cout << banned[i].getFullName() << " - " << banned[i].getEmail() << endl;
+		}
 	}
 
 	void afisareManagerEmails() {
-		int indici[100];
+		User users[100];
+		int dim;
+		controluser.getAllUsers(users, dim);
+
+		User managers[100];
 		int n = 0;
-		controluser.getManagerIDs(indici, n);
-		//controluser.afisareManagersEmails(indici, n);
+		for (int i = 0; i < dim; i++) {
+			if (users[i].getType() == "Manager") {
+				managers[n] = users[i];
+				n++;
+			}
+		}
+
+		cout << "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" << endl;
+		cout << "Managers :" << endl;
+		for (int i = 0; i < n; i++) {
+			cout << managers[i].getFullName() << " - " << managers[i].getEmail() << endl;
+		}
 	}
 
 	// MODIFICARE USER :
@@ -260,23 +288,61 @@ private:
 	// STATISTICI :
 
 	void seeMostPopularProduct() {
-		int ids[100], quantities[100];
-		int n = 0;
-		controlorderdetails.sortedByPopularity(ids, quantities, n);
-		controlproduct.viewMostPopularByIDs(ids, quantities, n);
+		int frequency[100]{};
+		controlorderdetails.productFrequency(frequency);
+		Product products[100];
+		int dim;
+		controlproduct.getAllProducts(products, dim);
+
+		bool flag = true;
+		do {
+			flag = true;
+			for (int i = 0; i < dim - 1; i++) {
+				if (frequency[products[i].getID()] < frequency[products[i + 1].getID()]) {
+					Product r = products[i];
+					products[i] = products[i + 1];
+					products[i + 1] = r;
+					flag = false;
+				}
+			}
+		} while (flag == false);
+
+		cout << "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" << endl;
+		cout << "Cel mai popular produs este " << products[0].getName() << endl;
+		cout << "Numar comandat : " << frequency[products[0].getID()] << endl;
 	}
 
 	void seeSortedByPopularity() {
-		int ids[100], quantities[100];
-		int n = 0;
-		controlorderdetails.sortedByPopularity(ids, quantities, n);
-		controlproduct.viewSortedByPopularity(ids, quantities, n);
+		int frequency[100]{};
+		controlorderdetails.productFrequency(frequency);
+		Product products[100];
+		int dim;
+		controlproduct.getAllProducts(products, dim);
+
+		bool flag = true;
+		do {
+			flag = true;
+			for (int i = 0; i < dim - 1; i++) {
+				if (frequency[products[i].getID()] < frequency[products[i + 1].getID()]) {
+					Product r = products[i];
+					products[i] = products[i + 1];
+					products[i + 1] = r;
+					flag = false;
+				}
+			}
+		} while (flag == false);
+
+		cout << "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" << endl;
+		int j = dim;
+		for (int i = 0; i < dim && frequency[products[i].getID()] > 0; i++, j--) {
+			cout << products[i].getName() << " - " << frequency[products[i].getID()] << endl;
+		}
+		cout << "Restul de " << j + 1 << " produse nu au fost comandate." << endl;
 	}
 
 	void seeWorstActivityClient() {
 		int f[100]{};
 		controlorder.frecventaOrders(f);
-
 		User u[100];
 		int dim = 0;
 		controluser.getAllUsers(u, dim);
@@ -293,23 +359,65 @@ private:
 			}
 		} while (flag == false);
 
+		cout << "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" << endl;
 		cout << "Cel mai inactiv user este : " << u[0].getEmail() << endl;
 		cout << "Numarul de comenzi : " << f[u[0].getID()] << endl;
 	}
 
-	//void seeBestClient() {
-	//	int ids[100], ammounts[100];
-	//	int n = 0;
-	//	controlorder.sortedClientsByAmmountSpent(ids, ammounts, n);
-	//	controluser.viewBestClient(ids, ammounts, n);
-	//}
+	void seeBestClient() {
+		int ammounts[100]{};
+		controlorder.getAmmountsSpent(ammounts);
+		int dim;
+		User users[100];
+		controluser.getAllUsers(users, dim);
 
-	//void seeSortedByAmmountSpent() {
-	//	int ids[100], ammounts[100];
-	//	int n = 0;
-	//	controlorder.sortedClientsByAmmountSpent(ids, ammounts, n);
-	//	controluser.viewSortedByQuantityBought(ids, ammounts, n);
-	//}
+		bool flag = true;
+		do {
+			flag = true;
+			for (int i = 0; i < dim - 1; i++) {
+				if (ammounts[users[i].getID()] < ammounts[users[i + 1].getID()]) {
+					User r = users[i];
+					users[i] = users[i + 1];
+					users[i + 1] = r;
+					flag = false;
+				}
+			}
+		} while (flag == false);
+
+		int i = 0;
+		cout << "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" << endl;
+		cout << "Cel mai bun client este " << users[0].getFullName() << endl;
+		cout << "Email : " << users[0].getEmail() << endl;
+		cout << "Suma cheltuita : " << ammounts[users[i].getID()] << endl;
+	}
+
+	void seeSortedByAmmountSpent() {
+		int ammounts[100]{};
+		controlorder.getAmmountsSpent(ammounts);
+		User users[100];
+		int dim;
+		controluser.getAllUsers(users, dim);
+
+		bool flag = true;
+		do {
+			flag = true;
+			for (int i = 0; i < dim - 1; i++) {
+				if (ammounts[users[i].getID()] < ammounts[users[i + 1].getID()]) {
+					User r = users[i];
+					users[i] = users[i + 1];
+					users[i + 1] = r;
+					flag = false;
+				}
+			}
+		} while (flag == false);
+
+		int j = dim;
+		cout << "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" << endl;
+		for (int i = 0; i < dim && ammounts[users[i].getID()] > 0; i++, j--) {
+			cout << users[i].getFullName() << " - " << users[i].getEmail() << " - " << ammounts[users[i].getID()] << endl;
+		}
+		cout << "Restul de " << j + 1 << " persoane nu au cheltuit nimic." << endl;
+	}
 
 	// MENIURI :
 
@@ -409,16 +517,16 @@ private:
 			switch (z)
 			{
 			case 1:
-				/*seeMostPopularProduct();*/
+				seeMostPopularProduct();
 				break;
 			case 2:
-				/*seeSortedByPopularity();*/
+				seeSortedByPopularity();
 				break;
 			case 3:
-				/*seeBestClient();*/
+				seeBestClient();
 				break;
 			case 4:
-				/*seeSortedByAmmountSpent();*/
+				seeSortedByAmmountSpent();
 				break;
 			case 5:
 				seeWorstActivityClient();
@@ -489,10 +597,10 @@ public:
 				removeUser();
 				break;
 			case 8:
-				/*afisareBannedUserEmails();*/
+				afisareBannedUserEmails();
 				break;
 			case 9:
-				/*afisareManagerEmails();*/
+				afisareManagerEmails();
 				break;
 			case 10:
 				addManager();

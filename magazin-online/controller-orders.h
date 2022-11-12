@@ -118,53 +118,11 @@ public:
 		f << toSave();
 	}
 
-	int findClient(int ids[], int n, int id) {
-		// USED FOR SPECIFIC FUNCTION
-		for (int i = 0; i < n; i++) {
-			if (ids[i] == id) {
-				return i;
-			}
-		}
-		return -1;
-	}
-
-	void sortedClientsByAmmountSpent(int ids[], int ammounts[], int& n) {
+	void getAmmountsSpent(int ammounts[]) {
+		dim = this->dim;
 		for (int i = 0; i < dim; i++) {
-			int j = findClient(ids, n, orders[i].getCustomerID());
-			if (j == -1) {
-				ids[n] = orders[i].getCustomerID();
-				ammounts[n] = 0;
-				j = n;
-				n++;
-			}
-			ammounts[j] += orders[i].getAmmount();
+			ammounts[orders[i].getCustomerID()] += orders[i].getAmmount();
 		}
-
-		bool flag = true;
-		do {
-			flag = true;
-			for (int i = 0; i < n - 1; i++) {
-				if (ammounts[i] < ammounts[i + 1]) {
-					int r1 = ids[i];
-					int r2 = ammounts[i];
-					ids[i] = ids[i + 1];
-					ammounts[i] = ammounts[i + 1];
-					ids[i + 1] = r1;
-					ammounts[i + 1] = r2;
-					flag = false;
-				}
-			}
-		} while (flag == false);
-	}
-
-	int getOrderCountOfUser(int userid) {
-		int c = 0;
-		for (int i = 0; i < dim; i++) {
-			if (orders[i].getCustomerID() == userid) {
-				c++;
-			}
-		}
-		return c;
 	}
 
 	void frecventaOrders(int f[]) {

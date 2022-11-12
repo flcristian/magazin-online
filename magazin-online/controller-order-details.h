@@ -60,29 +60,6 @@ public:
 		return this->orderdetails[i];
 	}
 
-	void sortedByPopularity(int ids[], int quantities[], int& n) {
-		for (int i = 0; i < dim; i++) {
-			ids[n] = orderdetails[n].getProductID();
-			quantities[n] = orderdetails[n].getQuantity();
-			n++;
-		}
-		bool flag = true;
-		do {
-			flag = true;
-			for (int i = 0; i < n - 1; i++) {
-				if (quantities[i] < quantities[i + 1]) {
-					int r1 = ids[i];
-					int r2 = quantities[i];
-					ids[i] = ids[i + 1];
-					quantities[i] = quantities[i + 1];
-					ids[i + 1] = r1;
-					quantities[i + 1] = r2;
-					flag = false;
-				}
-			}
-		} while (flag == false);
-	}
-
 	int getDim() {
 		return this->dim;
 	}
@@ -190,6 +167,12 @@ public:
 		ofstream f("orderdetails.txt");
 
 		f << toSave();
+	}
+
+	void productFrequency(int f[]) {
+		for (int i = 0; i < dim; i++) {
+			f[orderdetails[i].getProductID()] += orderdetails[i].getQuantity();
+		}
 	}
 
 };
