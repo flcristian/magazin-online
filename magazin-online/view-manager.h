@@ -337,7 +337,7 @@ private:
 		for (int i = 0; i < dim && frequency[products[i].getID()] > 0; i++, j--) {
 			cout << products[i].getName() << " - " << frequency[products[i].getID()] << endl;
 		}
-		cout << "Restul de " << j + 1 << " produse nu au fost comandate." << endl;
+		cout << "Restul de " << j << " produse nu au fost comandate." << endl;
 	}
 
 	void seeWorstActivityClient() {
@@ -416,7 +416,7 @@ private:
 		for (int i = 0; i < dim && ammounts[users[i].getID()] > 0; i++, j--) {
 			cout << users[i].getFullName() << " - " << users[i].getEmail() << " - " << ammounts[users[i].getID()] << endl;
 		}
-		cout << "Restul de " << j + 1 << " persoane nu au cheltuit nimic." << endl;
+		cout << "Restul de " << j << " persoane nu au cheltuit nimic." << endl;
 	}
 
 	// MENIURI :
