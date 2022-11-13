@@ -340,7 +340,7 @@ private:
 		cout << "Restul de " << j << " produse nu au fost comandate." << endl;
 	}
 
-	void seeWorstActivityClient() {
+	void seeBestActivityClient() {
 		int f[100]{};
 		controlorder.frecventaOrders(f);
 		User u[100];
@@ -360,8 +360,8 @@ private:
 		} while (flag == false);
 
 		cout << "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" << endl;
-		cout << "Cel mai inactiv user este : " << u[0].getEmail() << endl;
-		cout << "Numarul de comenzi : " << f[u[0].getID()] << endl;
+		cout << "Cel mai activ user este : " << u[dim-1].getEmail() << endl;
+		cout << "Numarul de comenzi : " << f[u[dim-1].getID()] << endl;
 	}
 
 	void seeBestClient() {
@@ -529,7 +529,7 @@ private:
 				seeSortedByAmmountSpent();
 				break;
 			case 5:
-				seeWorstActivityClient();
+				seeBestActivityClient();
 				break;
 			case 6:
 				running = false;
@@ -547,7 +547,7 @@ private:
 		cout << "- 2 pentru a vedea toate produsele sortate dupa popularitate" << endl;
 		cout << "- 3 pentru a vedea cel mai fidel client" << endl;
 		cout << "- 4 pentru a vedea totii clientii sortati dupa cantitatea cumparata" << endl;
-		cout << "- 5 pentru a vedea clientul cu cea mai mica activitate" << endl;
+		cout << "- 5 pentru a vedea clientul cu cea mai buna activitate" << endl;
 		cout << "- 6 pentru a iesi" << endl;
 	}
 
