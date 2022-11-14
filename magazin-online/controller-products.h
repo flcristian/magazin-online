@@ -151,25 +151,10 @@ public:
 		f << toSave();
 	}
 
-	void viewMostPopularByIDs(int ids[], int quantities[], int n) {
-		int indici[100];
+	void getAllProducts(Product products[], int& d) {
 		for (int i = 0; i < dim; i++) {
-			indici[i] = getIndice(ids[i]);
+			products[i] = produse[i];
 		}
-		cout << "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" << endl;
-		cout << "Cel mai popular produs este : " << produse[indici[0]].getName() << endl;
-		cout << "Cantitate cumparata : " << quantities[0] << endl;
+		d = dim;
 	}
-
-	void viewSortedByPopularity(int ids[], int quantities[], int n) {
-		int indici[100];
-		for (int i = 0; i < n; i++) {
-			indici[i] = getIndice(ids[i]);
-		}
-		cout << "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-" << endl;
-		for (int i = 0; i < n; i++) {
-			cout << produse[indici[i]].getName() << " : " << quantities[i] << " buc." << endl;
-		}
-	}
-
 };
